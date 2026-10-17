@@ -13,7 +13,6 @@
     "lint": "tsc -b --pretty false"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.118.0",
     "@vitejs/plugin-react": "latest",
     "lucide-react": "latest",
     "react": "latest",
