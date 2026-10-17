@@ -89,5 +89,5 @@ export interface AppData {
   weights: WeightLog[]
   photos: PhotoLog[]
   favorites: string[]
-  settings: { theme: 'dark' | 'light'; reducedMotion: boolean; largeText: boolean; reminders: boolean }
+  settings: { theme: 'dark' | 'light'; reducedMotion: boolean; largeText: boolean; reminders: boolean; cloudSyncEnabled?: boolean }
 }

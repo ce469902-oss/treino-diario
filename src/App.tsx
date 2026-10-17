@@ -12,6 +12,7 @@ import ActivityHub from './components/ActivityHub'
 import { dateKey, generateRoutine } from './data'
 import { useAppStore } from './store'
 import type { Profile as ProfileType } from './types'
+import { cloudConfigured, currentCloudUser, saveCloudData } from './cloud'
 
 const tabs = [
   {id:'home',label:'Hoje',icon:Home}, {id:'activity',label:'Mover',icon:Dumbbell}, {id:'nutrition',label:'Alimentar',icon:Apple}, {id:'progress',label:'Evolução',icon:TrendingUp}, {id:'profile',label:'Perfil',icon:UserRound}
@@ -22,6 +23,11 @@ export default function App(){
   const [page,setPage]=useState('home'), [editing,setEditing]=useState(false), [toast,setToast]=useState('')
   useEffect(()=>{document.documentElement.dataset.theme=data.settings.theme;document.documentElement.classList.toggle('large-text',data.settings.largeText);document.documentElement.classList.toggle('reduced-motion',data.settings.reducedMotion)},[data.settings])
   useEffect(()=>{if(!toast)return;const timer=window.setTimeout(()=>setToast(''),2400);return()=>clearTimeout(timer)},[toast])
+  useEffect(()=>{
+    if(!cloudConfigured||!data.settings.cloudSyncEnabled||!data.onboardingComplete)return
+    const timer=window.setTimeout(async()=>{const user=await currentCloudUser();if(user)saveCloudData(data).catch(()=>undefined)},1600)
+    return()=>window.clearTimeout(timer)
+  },[data])
   const saveProfile=(profile:ProfileType)=>{update(d=>({...d,profile,onboardingComplete:true,tasksByDate:{...d.tasksByDate,[dateKey()]:generateRoutine(profile)}}));setEditing(false);setPage('home');setToast(editing?'Perfil atualizado':'Seu plano está pronto')}
   if(!data.onboardingComplete||!data.profile||editing)return <Onboarding onComplete={saveProfile} existing={editing?data.profile:undefined}/>
   const navigate=(next:string)=>{setPage(next);window.scrollTo({top:0,behavior:data.settings.reducedMotion?'auto':'smooth'})}
