@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     ...(mode === 'standalone' ? [viteSingleFile()] : []),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['evolve-icon.svg'],
+      includeAssets: ['icons/*.png'],
       manifest: {
         name: 'EVOLVE — Sua evolução começa hoje',
         short_name: 'EVOLVE',
@@ -25,7 +25,9 @@ export default defineConfig(({ mode }) => {
         start_url: githubBase,
         scope: githubBase,
         icons: [
-          { src: `${githubBase}evolve-icon.svg`, sizes: 'any', type: 'image/svg+xml', purpose: 'any maskable' }
+          { src: `${githubBase}icons/evolve-192.png`, sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: `${githubBase}icons/evolve-512.png`, sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: `${githubBase}icons/evolve-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
         ],
       },
       workbox: {

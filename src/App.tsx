@@ -36,5 +36,5 @@ export default function App(){
     return <Dashboard data={data} update={update} onNavigate={navigate} notify={setToast}/>
   }
   const immersive=['workout','run','recovery'].includes(page)
-  return <div className="app-shell"><div className="brand-rail"><div className="brand"><span>EV</span><strong>EVOLVE</strong></div><p>Sua evolução começa hoje.</p></div><div className="app-content">{content()}</div>{!immersive&&<nav className="bottom-nav" aria-label="Navegação principal">{tabs.map(tab=>{const Icon=tab.icon;return <button key={tab.id} className={page===tab.id?'active':''} onClick={()=>navigate(tab.id)}><Icon/><span>{tab.label}</span></button>})}</nav>}{toast&&<div className="toast" role="status">{toast}</div>}</div>
+  return <div className="app-shell"><div className="brand-rail"><div className="brand"><span><img src={`${import.meta.env.BASE_URL}icons/evolve-192.png`} alt="" /></span><strong>EVOLVE</strong></div><p>Sua evolução começa hoje.</p></div><div className="app-content">{content()}</div>{!immersive&&<nav className="bottom-nav" aria-label="Navegação principal">{tabs.map(tab=>{const Icon=tab.icon;return <button key={tab.id} className={page===tab.id?'active':''} onClick={()=>navigate(tab.id)}><Icon/><span>{tab.label}</span></button>})}</nav>}{toast&&<div className="toast" role="status">{toast}</div>}</div>
 }

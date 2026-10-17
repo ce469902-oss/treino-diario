@@ -27,7 +27,7 @@ export default function Onboarding({ onComplete, existing }: Props) {
 
   if (step === 0) return (
     <main className="welcome-shell">
-      <div className="welcome-mark"><span>EV</span></div>
+      <div className="welcome-mark"><img src={`${import.meta.env.BASE_URL}icons/evolve-192.png`} alt="" /></div>
       <p className="eyebrow">SUA EVOLUÇÃO COMEÇA HOJE</p>
       <h1>Um plano que se adapta à sua <em>vida real.</em></h1>
       <p className="welcome-copy">Treino, corrida, alimentação e recuperação organizados em uma rotina simples para você seguir.</p>
